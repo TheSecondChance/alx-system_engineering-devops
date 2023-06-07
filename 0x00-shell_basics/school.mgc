@@ -1,2 +1,15 @@
 #!/bin/bash
 
+# Create a temporary file to hold the magic rule
+tmp_file=$(mktemp)
+
+# Write the magic rule to the temporary file
+echo '0 string SCHOOL School data file' > "$tmp_file"
+
+# Compile the magic file using the temporary file
+file -C -m "$tmp_file" school.mgc
+
+# Remove the temporary file
+rm "$tmp_file"
+
+echo "Magic file 'school.mgc' created"
