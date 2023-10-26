@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#10 time loop 9th iteration display Hi
+
+i=10
+
+while [ $i -gt 0 ]
+do
+	if [[ $i == 1 ]]; then
+	   echo $"Hi"
+	fi
+	echo $"Best School"
+        ((i--))
+done
