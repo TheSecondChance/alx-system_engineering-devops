@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#display 4th bad luck display 8th good luck
+#display Best School for the other iteration
+
+i=1
+while [ $i -le 10 ]
+do
+	if [ $i -eq 4 ]
+	then
+		echo "bad luck"
+	elif [ $i -eq 8 ]
+	then
+		echo "good luck"
+	else
+		echo "Best School"
+	fi
+	
+	i=$(( i + 1 ))
+done
