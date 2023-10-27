@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#displays lines containing the bash word,
+#thus allowing you to easily get the PID
+
+ps aux --forest | grep bash
