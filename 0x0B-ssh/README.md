@@ -1,4 +1,4 @@
-server
+serveir  
 	In computing, a server is a piece of computer hardware or software
 	(computer program) that provides functionality for other programs or devices, called "clients".
 	This architecture is called the client–server model. Servers can provide various functionalities,
