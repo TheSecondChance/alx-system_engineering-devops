@@ -1,3 +1,5 @@
+#  Install Nginx web serve
+
 package {
     'nginx':
     ensure => installed,
