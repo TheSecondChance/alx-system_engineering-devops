@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#Bash script that transfers a file from our client to a server
+
+scp -i "$4" -o StrictHostKeyChecking=no "$1" "$3"@"$2":~/
