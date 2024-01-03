@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # Configures Nginx server so that ridirec another server
 
-if ! nginx -v; then
 sudo apt-get update -y
 sudo apt-get install -y nginx
-fi
 sudo service nginx start
 sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
 sudo rm /var/www/html/index.nginx-debian.html
