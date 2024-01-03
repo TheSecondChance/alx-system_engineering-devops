@@ -4,7 +4,10 @@
 sudo apt-get update -y
 sudo apt-get install -y nginx
 sudo service nginx start
-sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
-sudo rm /var/www/html/index.nginx-debian.html
-sudo sed -i '/listen \[::\]:80 default_server;/a rewrite ^/redirect_me/(.*)$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+replacement="server_name _;\n\tlocation \/redirect_me {\n\t\t return 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}"
+sed -i "s/server_name _;/$replacement/" /etc/nginx/sites-available/default
+
+sudo ufw allow 'NGINX Full'
 sudo service nginx restart
