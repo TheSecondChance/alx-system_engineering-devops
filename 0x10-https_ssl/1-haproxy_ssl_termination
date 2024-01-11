@@ -1,0 +1,42 @@
+global
+    log     /dev/log local0       
+    maxconn 2048
+    user    haproxy
+    group   haproxy
+    tune.ssl.default-dh-param 2048
+
+    ca-base /etc/ssl/certs        
+    crt-base /etc/ssl/private     
+
+    ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+    ssl-default-bind-options no-sslv3
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    retries 3
+    option  redispatch
+    timeout connect  5000
+    timeout client  10000
+    timeout server  10000
+    option  forwardfor
+    option  http-server-close
+
+frontend www-http
+    bind   *:80
+    http-request set-header X-Forwarded-Proto http
+    default_backend www-backend
+
+frontend www-https
+    bind   *:443 ssl crt /etc/letsencrypt/live/http:/www.holb20233lcidz.tech/cert.pem
+    http-request set-header X-Forwarded-Proto https
+    default_backend www-backend
+
+
+backend www-backend
+    balance  roundrobin
+    redirect scheme https if !{ ssl_fc }
+    server 203672-web-01 52.91.154.49:80 check
+    server 203672-web-02 54.197.206.197:80 check
