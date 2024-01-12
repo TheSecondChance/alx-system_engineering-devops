@@ -34,7 +34,6 @@ frontend www-https
     http-request set-header X-Forwarded-Proto https
     default_backend www-backend
 
-
 backend www-backend
     balance  roundrobin
     redirect scheme https if !{ ssl_fc }
