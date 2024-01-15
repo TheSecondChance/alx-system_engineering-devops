@@ -1,10 +1,29 @@
 #!/usr/bin/env bash
-# configur web-01
+# configure nginx
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
-sudo sed -i "46i rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
-sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
-sudo sed -i "46i error_page 404 /custom_404.html;" /etc/nginx/sites-available/default
-sudo service nginx restart
+NGINX_CONFIG="
+server {
+       listen 80 default_server;
+       listen [::]:80 default_server;
+
+       root /var/www/html;
+
+	   add_header X-Served-By \$hostname;
+
+       index index.html index.htm index.nginx-debian.html;
+
+       server_name _;
+
+       location /redirect_me {
+       			return 301  https://www.youtube.com/watch?v=QH2-TGUlwu4;
+	   }
+
+       location / {
+       			try_files \$uri \$uri/ =404;
+       }
+}
+"
+
+echo -e "$NGINX_CONFIG" | sudo tee /etc/nginx/sites-enabled/default
+
+sudo service nginx reload
