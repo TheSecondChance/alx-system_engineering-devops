@@ -34,8 +34,9 @@ frontend www-https
     http-request set-header X-Forwarded-Proto https
     default_backend www-backend
 
+
 backend www-backend
     balance  roundrobin
     redirect scheme https if !{ ssl_fc }
-    server 203672-web-01 52.91.154.49:80 check
-    server 203672-web-02 54.197.206.197:80 check
+    server 425254-web-01 54.82.132.222:80 check
+    server 425254-web-02 52.91.148.76:80 check
