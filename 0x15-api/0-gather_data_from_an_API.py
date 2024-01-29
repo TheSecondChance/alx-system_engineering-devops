@@ -8,8 +8,7 @@ if __name__ == "__main__":
     feachUrl = "https://jsonplaceholder.typicode.com/"
     employeeId = sys.argv[1]
     userRsponse = requests.get(feachUrl + "users/{}".format(
-        employeeId
-    ))
+        employeeId))
     userResponsJason = userRsponse.json()
     params = {"userId": employeeId}
     todosRespons = requests.get(feachUrl + "todos",
@@ -20,8 +19,7 @@ if __name__ == "__main__":
         if todo.get("completed") is True:
             taskCompleted.append(todo.get("title"))
     print("Employee {} is done with task({}/{})".format(
-        userResponsJason.get("name"), len(taskCompleted), len(todos)
-    ))
+        userResponsJason.get("name"), len(taskCompleted), len(todos)))
 
     for Completed in taskCompleted:
         print("\t {}".format(Completed))
