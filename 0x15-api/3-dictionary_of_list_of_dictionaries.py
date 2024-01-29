@@ -1,20 +1,20 @@
 #!/usr/bin/python3
-"""Python script to export data in the JSON format."""
+"""Python script to export data in the JSON format
+"""
 import json
 import requests
-import sys
 
 if __name__ == "__main__":
-    userId = sys.argv[1]
     feachUrl = "https://jsonplaceholder.typicode.com/"
-    userJson = requests.get(feachUrl + "users/{}".format(userId)).json()
-    userName = userJson.get("username")
-    todos = requests.get(feachUrl + "todos", params={"userId": userId}).json()
+    usersJson = requests.get(feachUrl + "users/").json()
 
-    """Dump to json file format"""
-    with open("{}.json".format(userId), "w") as jsonFile:
-        json.dump({userId: [{
+    with open("todo_all_employees.json", "w") as jsonFile:
+        json.dump({
+            userId.get("id"): [{
                 "task": todo.get("title"),
                 "completed": todo.get("completed"),
-                "username": userName
-            } for todo in todos]}, jsonFile)
+                "username": userId.get("username")
+            } for todo in requests.get(
+                feachUrl + "todos", params={"userId": userId.get(
+                    "id")}).json()]
+            for userId in usersJson}, jsonFile)
