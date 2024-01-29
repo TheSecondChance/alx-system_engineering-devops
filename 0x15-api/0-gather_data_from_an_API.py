@@ -22,6 +22,6 @@ if __name__ == "__main__":
     print("Employee {} is done with task({}/{})".format(
         userResponsJason.get("name"), len(taskCompleted), len(todos)
     ))
-    
+
     for Completed in taskCompleted:
         print("\t {}".format(Completed))
