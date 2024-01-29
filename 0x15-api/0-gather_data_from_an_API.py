@@ -18,8 +18,7 @@ if __name__ == "__main__":
     for todo in todos:
         if todo.get("completed") is True:
             taskCompleted.append(todo.get("title"))
-    print("Employee {} is done with task({}/{})".format(
-        userResponsJason.get("name"), len(taskCompleted), len(todos)))
+    print("Employee {} is done with task({}/{})".format(userResponsJason.get("name"), len(taskCompleted), len(todos)))
 
     for Completed in taskCompleted:
         print("\t {}".format(Completed))
