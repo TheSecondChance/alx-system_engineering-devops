@@ -10,7 +10,7 @@ if __name__ == "__main__":
     userJson = requests.get(feachUrl + "users/{}".format(userId)).json()
     userName = userJson.get("username")
     todos = requests.get(feachUrl + "todos", params={"userId": userId}).json()
-    
+
     """Dump to json file format"""
     with open("{}.json".format(userId), "w") as jsonFile:
         json.dump({userId: [{
